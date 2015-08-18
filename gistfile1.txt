@@ -1,0 +1,33 @@
+*** Settings ***
+Library           Selenium2Library
+
+*** Variables ***
+${USERNAME}       samulaizanca007@gmail.com
+${PASSWORD}       summit123
+
+*** Test Cases ***
+Login Process
+    Open Browser    https://iservice.truecorp.co.th/    ff    ff_profile_dir=../execution/config/ff_profile
+    Click Element    //*/span[@data-modal='modal-login']
+    Wait Until Element Is Visible    //h1[@class='red-txt']    5
+    Input Text    id=u    ${USERNAME}
+    Input Password    id=p    ${PASSWORD}
+    Click Element    id=btn_submit
+    Wait Until Element Is Visible    //*/a[@class='allService']    120
+    Click Link    //*/a[@class='cmn-btn xs-btn']
+    Wait Until Element Is Visible    id=btnSend    120
+    Click Link    id=btnSend
+    Wait Until Element Is Visible    id=btnConfirm    120
+    Click Link    id=btnConfirm
+    Wait Until Element Is Visible    //*/input[@class='left cancelbutton']    120
+    Click Element    //*/input[@class='left cancelbutton']
+    Wait Until Element Is Visible    //*[contains(text(),'Yes')]    120
+    Click Element    //*[contains(text(),'Yes')]
+    Wait Until Element Is Visible    //*/span[@class='cmn-btn xs-btn softblue-btn']    120
+    Click Element    //*/span[@class='cmn-btn xs-btn softblue-btn']
+    Wait Until Element Is Visible    //a[@class='cmn-btn small-btn gray-btn']    120
+    Click Element    //a[@class='cmn-btn small-btn gray-btn']
+    goto    https://iservice.truecorp.co.th/home/member_logout
+    Comment    Confirm Action
+    Wait Until Element Is Visible    //*/span[@data-modal='modal-login']    120
+    [Teardown]    Close Browser
